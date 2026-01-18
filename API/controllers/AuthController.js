@@ -3,7 +3,7 @@ import model from '../models/index.cjs';
 
 // import { registerSchema } from "../validators/auth.js";
 
-const { User } = model;
+const { UsersStars } = model;
 
 export default {
   async signUp(req, res) {
@@ -12,10 +12,10 @@ export default {
     
     const {name, email, phone, password, status} = req.body;
     try {
-      const user = await User.findOne({where: {[Op.or]: [ {phone}, {email} ]}});
+      const user = await UsersStars.findOne({where: {[Op.or]: [ {phone}, {email} ]}});
       if(user) {
         return res.status(422)
-        .send({message: 'User with that email or phone already exists'});
+        .send({message: 'UsersStars with that email or phone already exists'});
       }
 
       // Hash password
@@ -23,7 +23,7 @@ export default {
         const hashedPassword = await bcrypt.hash(password, salt);
 
       // Create new user
-      await User.create({
+      await UsersStars.create({
         name,
         email,
         phone,

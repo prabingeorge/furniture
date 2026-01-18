@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, PurchaseDetails } = model;
+const { UsersStars, CategoriesStars, CategoriesListsStars, CategoriesListItemsStars, PurchaseDetailsStars } = model;
 
 const router = express.Router();
 
@@ -12,25 +12,25 @@ const router = express.Router();
 // router.get("/categories", auth, async (req, res) => {
 router.get("/categories", async (req, res) => {
   try {
-    const categories = await Categories.findAll();
+    const categories = await CategoriesStars.findAll();
     res.json(categories);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Add Categories-list
+// Add CategoriesStars-list
 router.post("/categories-list", async (req, res) => {
   const { type, imageName, categoryId } = req.body;
   try {
-    const categoriesList = await CategoriesLists.findOne({ where: { [Op.or]: [{ type }] } });
+    const categoriesList = await CategoriesListsStars.findOne({ where: { [Op.or]: [{ type }] } });
     if (categoriesList) {
       return res.status(422)
         .send({ message: 'Type already exists' });
     }
 
     // Create new categories list
-    const newData = await CategoriesLists.create({
+    const newData = await CategoriesListsStars.create({
       type,
       image_name: imageName,
       category_id: categoryId
@@ -48,7 +48,7 @@ router.post("/categories-list", async (req, res) => {
 // Get all categories-list
 router.get("/categories-list", async (req, res) => {
   try {
-    const categoriesList = await CategoriesLists.findAll();
+    const categoriesList = await CategoriesListsStars.findAll();
     res.json(categoriesList);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -59,7 +59,7 @@ router.get("/categories-list", async (req, res) => {
 router.post("/categories-list-by-id", async (req, res) => {
   try {
     const { category_id } = req.body;
-    const categoriesList = await CategoriesLists.findAll({ where: { [Op.or]: [{ category_id }] } });
+    const categoriesList = await CategoriesListsStars.findAll({ where: { [Op.or]: [{ category_id }] } });
     res.json(categoriesList);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -70,7 +70,7 @@ router.post("/categories-list-by-id", async (req, res) => {
 router.post("/categories-list-items-by-id", async (req, res) => {
   try {
     const { categoryListId } = req.body;
-    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ category_list_id: categoryListId }] } });
+    const categoriesListItems = await CategoriesListItemsStars.findAll({ where: { [Op.or]: [{ category_list_id: categoryListId }] } });
     res.json(categoriesListItems);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -81,7 +81,7 @@ router.post("/categories-list-items-by-id", async (req, res) => {
 router.post("/categories-list-items-details", async (req, res) => {
   try {
     const { categoryListItemId } = req.body;
-    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] } });
+    const categoriesListItems = await CategoriesListItemsStars.findAll({ where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] } });
     res.json(...categoriesListItems);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -93,7 +93,7 @@ router.post("/purchase-detail", auth, async (req, res) => {
   const { userId, categoryId, categoryListId, categoryListItemId, quantity, amount } = req.body;
   console.log("======" + JSON.stringify(req.body))
   try {
-    // const purchaseDetail = await PurchaseDetails.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
+    // const purchaseDetail = await PurchaseDetailsStars.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
     // console.log("-------" + purchaseDetail)
     // if (!purchaseDetail) {
     //     return res.status(422)
@@ -101,7 +101,7 @@ router.post("/purchase-detail", auth, async (req, res) => {
     // }
 
     // Create new purchase list
-    const newData = await PurchaseDetails.create({
+    const newData = await PurchaseDetailsStars.create({
       user_id: userId,
       category_id: categoryId,
       category_list_id: categoryListId,
@@ -122,7 +122,7 @@ router.post("/purchase-detail", auth, async (req, res) => {
 // Get all categories-list
 router.get("/purchase-details", async (req, res) => {
   try {
-    const purchaseDetails = await PurchaseDetails.findAll();
+    const purchaseDetails = await PurchaseDetailsStars.findAll();
     res.json(purchaseDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -133,7 +133,7 @@ router.get("/purchase-details", async (req, res) => {
 router.post("/purchase-details-by-userid", async (req, res) => {
   try {
     const { userId } = req.body;
-    const purchaseDetails = await PurchaseDetails.findAll({ where: { [Op.or]: [{ user_id: userId }] } });
+    const purchaseDetails = await PurchaseDetailsStars.findAll({ where: { [Op.or]: [{ user_id: userId }] } });
     res.json(purchaseDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });

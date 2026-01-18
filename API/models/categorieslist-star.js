@@ -3,7 +3,7 @@ import { Model } from 'sequelize';
 const PROTECTED_ATTRIBUTES = ['password'];
 
 export default (sequelize, DataTypes) => {
-  class CategoriesListsStar extends Model {
+  class CategoriesListsStars extends Model {
     toJSON() {
       // hide protected fields
       const attributes = { ...this.get() };
@@ -22,7 +22,7 @@ export default (sequelize, DataTypes) => {
       // define association here
     }
   };
-  CategoriesListsStar.init({
+  CategoriesListsStars.init({
     category_list_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -33,7 +33,7 @@ export default (sequelize, DataTypes) => {
     category_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'CategoriesListsStar',
+    modelName: 'CategoriesListsStars',
   });
-  return CategoriesListsStar;
+  return CategoriesListsStars;
 };

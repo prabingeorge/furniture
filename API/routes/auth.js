@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems } = model;
+const { UsersStars, CategoriesStars, CategoriesListsStars, CategoriesListItemsStars } = model;
 
-console.log("Modal" + Categories);
+console.log("Modal" + CategoriesStars);
 
 
 import { registerSchema, loginSchema } from "../validators/auth.js";
@@ -26,11 +26,11 @@ router.post("/register", async (req, res) => {
 
     const { name, email, phone, password, status } = req.body;
     try {
-        console.log(User);
-        const user = await User.findOne({ where: { [Op.or]: [{ phone }, { email }] } });
+        console.log(UsersStars);
+        const user = await UsersStars.findOne({ where: { [Op.or]: [{ phone }, { email }] } });
         if (user) {
             return res.status(422)
-                .send({ message: 'User with that email or phone already exists' });
+                .send({ message: 'UsersStars with that email or phone already exists' });
         }
 
         // Hash password
@@ -39,7 +39,7 @@ router.post("/register", async (req, res) => {
         const hashedPassword = bcrypt.hashSync(password, 8)
 
         // Create new user
-        const newUser = await User.create({
+        const newUser = await UsersStars.create({
             name,
             email,
             phone,
@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         // Check for user
-        const user = await User.findOne({ where: { email } });
+        const user = await UsersStars.findOne({ where: { email } });
         if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
         // Compare password
@@ -99,20 +99,20 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// Add Categories
+// Add CategoriesStars
 router.post("/categories", async (req, res) => {
     console.log("register API");
     const { name } = req.body;
     try {
-        // console.log(Categories);
-        const user = await Categories.findOne({ where: { [Op.or]: [{ name }] } });
+        // console.log(CategoriesStars);
+        const user = await CategoriesStars.findOne({ where: { [Op.or]: [{ name }] } });
         if (user) {
             return res.status(422)
                 .send({ message: 'Name already exists' });
         }
 
         // Create new categories
-        const newData = await Categories.create({
+        const newData = await CategoriesStars.create({
             name
         });
 
@@ -127,18 +127,18 @@ router.post("/categories", async (req, res) => {
     }
 });
 
-// Add CategoriesLists
+// Add CategoriesListsStars
 router.post("/categories-list", async (req, res) => {
     const { type, imageName, categoryId } = req.body;
     try {
-        const categoriesList = await CategoriesLists.findOne({ where: { [Op.or]: [{ type }] } });
+        const categoriesList = await CategoriesListsStars.findOne({ where: { [Op.or]: [{ type }] } });
         if (categoriesList) {
             return res.status(422)
                 .send({ message: 'Type already exists' });
         }
 
         // Create new categories list
-        const newData = await CategoriesLists.create({
+        const newData = await CategoriesListsStars.create({
             type,
             image_name: imageName,
             category_id: categoryId
@@ -153,18 +153,18 @@ router.post("/categories-list", async (req, res) => {
     }
 });
 
-// Add Categories-list-items
+// Add CategoriesStars-list-items
 router.post("/categories-list-items", async (req, res) => {
     const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, categoryListId } = req.body;
     try {
-        const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
+        const categoriesListItems = await CategoriesListItemsStars.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
         if (categoriesListItems) {
             return res.status(422)
                 .send({ message: 'Item name already exists' });
         }
 
         // Create new categories list
-        const newData = await CategoriesListItems.create({
+        const newData = await CategoriesListItemsStars.create({
             item_name: itemName,
             image_name: imageName,
             price,

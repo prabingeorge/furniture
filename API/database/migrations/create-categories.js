@@ -1,6 +1,6 @@
 export default {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('CategoriesStar', {
+    await queryInterface.createTable('CategoriesStars', {
       category_id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,6 +24,6 @@ export default {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('CategoriesStar');
+    await queryInterface.dropTable('CategoriesStars');
   }
 };
