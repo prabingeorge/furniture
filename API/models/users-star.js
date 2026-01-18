@@ -3,7 +3,7 @@ import { Model } from 'sequelize';
 const PROTECTED_ATTRIBUTES = ['password'];
 
 export default (sequelize, DataTypes) => {
-  class User extends Model {
+  class UsersStar extends Model {
     toJSON() {
       // hide protected fields
       const attributes = { ...this.get() };
@@ -22,7 +22,7 @@ export default (sequelize, DataTypes) => {
       // define association here
     }
   };
-  User.init({
+  UsersStar.init({
     user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -56,7 +56,7 @@ export default (sequelize, DataTypes) => {
     last_ip_address: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'UsersStar',
   });
-  return User;
+  return UsersStar;
 };
