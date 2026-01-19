@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { CartContext } from "../../contexts/Cart";
 import "./index.css";
-import starLogo from "../../assets/images/header/logo3.png";
+import starLogo from "../../assets/images/header/star-logo.gif";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelopeCircleCheck, faSignOut, faSignIn, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
 
     const { user, logout } = useAuth();
+    const { totalCartCount } = useContext(CartContext);
 
     return (
         <div className="header-view">
@@ -20,10 +23,10 @@ const Header = () => {
                     </ul>
                     <ul className="right-menu">
                         <li>
-                            <FontAwesomeIcon icon={faPhone} size="1x" style={{ color: '#ffa500' }} /> +91 9486629098
+                            <FontAwesomeIcon icon={faPhone} size="1x" style={{ color: '#ffa500' }} /> +91 8904761075
                         </li>
                         <li>
-                            <FontAwesomeIcon icon={faEnvelopeCircleCheck} size="1x" style={{ color: '#ffa500' }} /> ajinselva03@gmail.com
+                            <FontAwesomeIcon icon={faEnvelopeCircleCheck} size="1x" style={{ color: '#ffa500' }} /> prabingeorge@gmail.com
                         </li>
                     </ul>
 
@@ -46,14 +49,14 @@ const Header = () => {
                             <FontAwesomeIcon icon={faSignIn} size="1x" style={{ color: '#ffa500', paddingRight: '5px' }} />
                             <Link to="/login">Sign In</Link>
                         </label>}
-                    {/* <label>
+                    <label>
                         <FontAwesomeIcon icon={faHeart} size="1x" style={{ color: '#ffa500', paddingRight: '5px' }} />
                         Wishlist (0)
                     </label>
                     <label>
                         <FontAwesomeIcon icon={faCartShopping} size="1x" style={{ color: '#ffa500', paddingRight: '5px' }} />
                         Cart ({totalCartCount()})
-                    </label> */}
+                    </label>
                 </div>
             </div>
         </div>

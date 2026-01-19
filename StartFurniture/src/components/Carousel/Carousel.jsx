@@ -7,7 +7,7 @@ const AppCarousel = () => {
                 <img
                     className="d-block w-100"
                     // src="holder.js/800x400?text=First slide&bg=f5f5f5"
-                    src='images/carousel/10.jpg?text=First slide&bg=f5f5f5'
+                    src='images/carousel/1.png?text=First slide&bg=f5f5f5'
                     alt="First slide"
                 />
                 <Carousel.Caption>
@@ -19,7 +19,7 @@ const AppCarousel = () => {
                 <img
                     className="d-block w-100"
                     // src="holder.js/800x400?text=Second slide&bg=eee"
-                    src='images/carousel/7.jpg?text=Second slide&bg=eee'
+                    src='images/carousel/2.png?text=Second slide&bg=eee'
                     alt="Second slide"
                 />
                 <Carousel.Caption>
@@ -31,7 +31,7 @@ const AppCarousel = () => {
                 <img
                     className="d-block w-100"
                     // src="holder.js/800x400?text=Third slide&bg=e5e5e5"
-                    src="images/carousel/8.jpg?text=Third slide&bg=e5e5e5"
+                    src="images/carousel/3.png?text=Third slide&bg=e5e5e5"
                     alt="Third slide"
                 />
                 <Carousel.Caption>
@@ -39,18 +39,6 @@ const AppCarousel = () => {
                     <p>
                         Praesent commodo cursus magna, vel scelerisque nisl consectetur.
                     </p>
-                </Carousel.Caption>
-            </Carousel.Item>
-             <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    // src="holder.js/800x400?text=First slide&bg=f5f5f5"
-                    src='images/carousel/9.jpg?text=Fourth slide&bg=e5e5e5'
-                    alt="Fourth slide"
-                />
-                <Carousel.Caption>
-                    <h5>Fourth slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

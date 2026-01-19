@@ -23,7 +23,7 @@
                 color: #1161ee;
             }
 
-            /* .product-counter {
+            .product-counter {
                 display: flex;
                 align-items: baseline;
 
@@ -55,7 +55,7 @@
                     display: inline-flex;
                     justify-content: center;
                 }
-            } */
+            }
 
             .event-details-label {
                 color: #ffa500;

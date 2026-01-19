@@ -293,9 +293,9 @@ const ProductConfirmation = () => {
                                             <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discount_price) * item?.quantity}
                                         </label>
                                     </div>
-                                    {/* <div>
+                                    <div>
                                         Quantity: <label>{item?.quantity}</label>
-                                    </div> */}
+                                    </div>
                                     <div className="footer-container">
                                         <input type="button" className="button" value="Remove" onClick={() => removeItemClick(item)} />
                                     </div>
