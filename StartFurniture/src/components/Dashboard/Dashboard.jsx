@@ -44,7 +44,7 @@ const Dashboard = () => {
             return (
               <div key={category?.category_list_id}>
                 <div>
-                  <Images fileName={category?.image_name} categoryListId={category?.category_list_id} path={'dashboard'} cssClass={'circle-image'} />
+                  <Images fileName={category?.image_name} categoryListId={category?.category_list_id} path={`dashboard/${selectedCategoryId}/`} cssClass={'circle-image'} />
                 </div>
                 <div className="type-container">
                   <label>{category?.type}</label>

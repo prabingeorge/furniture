@@ -1,8 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Images from "../Images/Images";
-import api from "../../contexts/APIContext";
 import { CartContext } from "../../contexts/Cart";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
@@ -13,8 +12,9 @@ const ProductOrder = () => {
     let params = useParams();
     const navigate = useNavigate();
 
-    const [productQuantity, setProductQuantity] = useState(1);
-    const [product, setProduct] = useState(null);
+    const product = cartItems.find((cartItem) => cartItem.category_list_item_id === parseInt(params?.categoryListItemId));
+
+    const [productQuantity, setProductQuantity] = useState(product?.quantity);
     const initialVenueInfo = {
         place: ""
     };
@@ -30,29 +30,12 @@ const ProductOrder = () => {
         });
     };
 
-    const apiURL = import.meta.env.VITE_API_URL;
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.post(apiURL + "/api/user/categories-list-items-details", { categoryListItemId: params?.categoryListItemId });
-                const { data } = response;
-                setProduct(data);
-                const selectedItem = cartItems.find((cartItem) => cartItem.category_list_id === data.category_list_id);
-                setProductQuantity(selectedItem?.quantity);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, [params?.categoryListItemId]);
-
     const setQuantity = (qty) => {
         setProductQuantity(qty);
         addCartQuantityCount(product, qty);
     }
 
-    const buyNowProduct = (product) => {
+    const buyNowProduct = () => {
         setValidationError("");
         if (!venueInfo?.place) {
             setValidationError("Enter all the Delivery Details!");

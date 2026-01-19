@@ -43,7 +43,7 @@ const CategoriesList = () => {
                             <>
                                 <ul key={image?.category_list_item_id} className="images-wrapper">
                                     <li>
-                                        <Images fileName={image.image_name} path={'details'} cssClass={'rectangle-image'} />
+                                        <Images fileName={image.image_name} path={`details/${selectedCategoryId}/`} cssClass={'rectangle-image'} />
                                     </li>
                                     <li>
                                         <label className="product-name">{image.item_name}</label>
